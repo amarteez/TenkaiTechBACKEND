@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/product_list.css' %}">
+</head>
+<body>
+    <div class="product-list-container">
+        <h1>Products</h1>
+        <div class="product-list">
+            {% for product in products %}
+                <div class="product">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% elif product.image_url %}
+                        <img src="{{ product.image_url }}" alt="{{ product.name }}">
+                    {% else %}
+                        <img src="{% static 'placeholder.png' %}" alt="Placeholder">
+                    {% endif %}
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.description }}</p>
+                    <p>${{ product.price }}</p>
+                    <form method="POST" action="{% url 'add-to-cart' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <label for="quantity_{{ product.id }}">Quantity:</label>
+                        <input type="number" id="quantity_{{ product.id }}" name="quantity" value="1" min="1" title="Quantity" placeholder="1">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

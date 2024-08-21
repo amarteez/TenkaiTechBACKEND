@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: TenkaiTechBackend
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn online_store.wsgi:application
+    envVars:
+      - key: SECRET_KEY
+        value: 0m-%ly4^j3dc3%azml14h&^%*tu9m52x)hn-i8ro=uvc-%0vdo
+      - key: DEBUG
+        value: 'False'
+      - key: ALLOWED_HOSTS
+        value: 'tenkaitechbackend.onrender.com,localhost,127.0.0.1'
+      - key: MONGO_URI
+        value: mongodb+srv://anelmartez18:NPsCQPVYRHhhOczM@tenkaitechdb.o8qlj.mongodb.net/tenkaitechDB?retryWrites=true&w=majority
