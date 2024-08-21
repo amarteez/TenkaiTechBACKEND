@@ -4,7 +4,7 @@ services:
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn online_store.wsgi
+    startCommand: gunicorn online_store.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
       - key: SECRET_KEY
         value: 0m-%ly4^j3dc3%azml14h&^%*tu9m52x)hn-i8ro=uvc-%0vdo
