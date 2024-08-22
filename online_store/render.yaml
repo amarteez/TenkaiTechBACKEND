@@ -4,7 +4,7 @@ services:
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn online_store.wsgi:application --bind 0.0.0.0:$PORT
+    startCommand: cd online_store && gunicorn online_store.wsgi:application
     workingDirectory: C:\Users\admin\Desktop\BACKEND_TK\online_store
     envVars:
       - key: SECRET_KEY

@@ -12,7 +12,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 # Permite los hosts que se conectan a la aplicación
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,tenkaitechbackend.onrender.com').split(',')
 
 # Configura la base de datos para MongoEngine usando MONGO_URI
 MONGO_URI = os.environ.get('MONGO_URI')
