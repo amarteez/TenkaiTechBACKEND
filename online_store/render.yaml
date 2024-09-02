@@ -3,9 +3,12 @@ services:
     name: TenkaiTechBackend
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: cd online_store && gunicorn online_store.wsgi:application
-    workingDirectory: C:\Users\admin\Desktop\BACKEND_TK\online_store
+    buildCommand: |
+      pip install -r requirements.txt
+    startCommand: |
+      cd online_store
+      gunicorn online_store.wsgi:application
+    workingDirectory: /workspace/online_store
     envVars:
       - key: SECRET_KEY
         value: 0m-%ly4^j3dc3%azml14h&^%*tu9m52x)hn-i8ro=uvc-%0vdo
@@ -13,5 +16,10 @@ services:
         value: 'False'
       - key: ALLOWED_HOSTS
         value: 'tenkaitechbackend.onrender.com,localhost,127.0.0.1'
-      - key: MONGO_URI
-        value: mongodb+srv://anelmartez18:NPsCQPVYRHhhOczM@tenkaitechdb.o8qlj.mongodb.net/tenkaitechDB?retryWrites=true&w=majority
+      - key: DATABASE_URL
+        value: postgresql://my_postgresql_db_v3xp_user:FQblXLC7lSm17pGgJQPG2JbCCqfSx42U@dpg-crb33ka3esus73aefep0-a.oregon-postgres.render.com/my_postgresql_db_v3xp
+    commands:
+      - command: |
+          python manage.py makemigrations
+          python manage.py migrate
+          python manage.py collectstatic --noinput
