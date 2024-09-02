@@ -1,4 +1,3 @@
-# store/views.py
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views import View
@@ -33,7 +32,7 @@ class ProductListView(View):
                         'name': product.name,
                         'description': product.description,
                         'price': product.price,
-                        'image': product.image,
+                        'image': product.image.url if product.image else None,  # Corregido: Acceder a la URL de la imagen
                         'image_url': product.image_url
                     } for product in products
                 ]

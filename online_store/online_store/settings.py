@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-import mongoengine
+import dj_database_url
 
 # Define BASE_DIR
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,20 +9,35 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
 
 # Configura el modo de depuración
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = os.environ.get('DEBUG', 'False') == 'False'
 
 # Permite los hosts que se conectan a la aplicación
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,tenkaitechbackend.onrender.com').split(',')
 
-# Configura la base de datos para MongoEngine usando MONGO_URI
-MONGO_URI = os.environ.get('MONGO_URI')
-mongoengine.connect(host=MONGO_URI)
+# Configuración de base de datos para producción
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL')
+    )
+}
+
+# Configuración de base de datos para desarrollo local
+if os.getenv('RENDER') is None:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'tenkaitech',
+        'USER': 'postgres',
+        'PASSWORD': 'qwerty12345',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 
 # Configura la aplicación WSGI
 WSGI_APPLICATION = 'online_store.wsgi.application'
 
 # Otras configuraciones (apps instaladas, middleware, etc.)
 INSTALLED_APPS = [
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
