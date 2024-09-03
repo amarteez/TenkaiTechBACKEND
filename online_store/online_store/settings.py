@@ -12,7 +12,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
 DEBUG = os.environ.get('DEBUG', 'False') == 'False'
 
 # Permite los hosts que se conectan a la aplicación
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,tenkaitechbackend.onrender.com').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,tenkaitechbackend.onrender.com,tenkaitech.onrender.com').split(',')
 
 # Configuración de base de datos para producción
 DATABASES = {
@@ -80,9 +80,9 @@ TEMPLATES = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "http://192.168.1.13:3000",
+    "http://192.168.1.2:3000",
     "https://tenkaitechbackend.onrender.com",
-    "https://amarteez.github.io",  # Solo el dominio
+    "https://tenkaitech.onrender.com",
 ]
 
 AUTH_PASSWORD_VALIDATORS = [
